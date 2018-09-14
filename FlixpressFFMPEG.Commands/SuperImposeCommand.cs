@@ -4,36 +4,34 @@ using System.Text;
 
 namespace FlixpressFFMPEG.Commands
 {
-    public class SuperImposeFFMPEGCommand : ICommandPart
+    public class SuperImposeCommand : FilterComplexCommandBase, ICommandPart
     {
-        private FFMPEGCommand FFMPEGCommand { get; set; }
         private string BaseVideoPath { get; set; }
         private List<OverlayVideo> OverlayVideos { get; set; }
 
-        public SuperImposeFFMPEGCommand(string executePath)
+        public SuperImposeCommand(string executePath) : base(executePath)
         {
-            FFMPEGCommand = new FFMPEGCommand(executePath);
             OverlayVideos = new List<OverlayVideo>();
         }
 
-        public SuperImposeFFMPEGCommand SetBaseVideoPath(string baseVideoPath)
+        public SuperImposeCommand SetBaseVideoPath(string baseVideoPath)
         {
             BaseVideoPath = baseVideoPath;
             return this;
         }
 
-        public SuperImposeFFMPEGCommand AddOverlayVideo(OverlayVideo overlayVideo)
+        public SuperImposeCommand AddOverlayVideo(OverlayVideo overlayVideo)
         {
             OverlayVideos.Add(overlayVideo);
             return this;
         }
 
-        public SuperImposeFFMPEGCommand AddOverlayVideo(string path, int startOffsetInSeconds, int durationInSeconds)
+        public SuperImposeCommand AddOverlayVideo(string path, int startOffsetInSeconds, int durationInSeconds)
         {
             return AddOverlayVideo(new OverlayVideo(path, startOffsetInSeconds, durationInSeconds));
         }
 
-        public SuperImposeFFMPEGCommand SetOutput(string output)
+        public SuperImposeCommand SetOutput(string output)
         {
             FFMPEGCommand.SetOutput(output);
             return this;

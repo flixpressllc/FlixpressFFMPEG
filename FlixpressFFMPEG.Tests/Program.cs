@@ -1,5 +1,6 @@
 ﻿using FlixpressFFMPEG.Commands;
 using System;
+using System.Collections.Generic;
 
 namespace FlixpressFFMPEG.Tests
 {
@@ -39,12 +40,21 @@ namespace FlixpressFFMPEG.Tests
                 .SetOutput(@"D:\Videos\subg-imposed.mpr");
                 */
 
-            SuperImposeFFMPEGCommand superImposeFFMPEGCommand = new SuperImposeFFMPEGCommand("ffmpegnew")
+            SuperImposeCommand superImposeFFMPEGCommand = new SuperImposeCommand("ffmpegnew")
                 .SetBaseVideoPath(@"D:\Videos\subg.mp4")
                 .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 5, 5)
                 .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 15, 5)
                 .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 20, 5)
                 .SetOutput(@"D:\Videos\subg-imposed-3.mp4");
+
+            ConcatenateCommand concatenateCommand = new ConcatenateCommand("ffmpegnew")
+                .AddFiles(new List<string>
+                {
+                    @"D:\Videos\tnt-te.mp4",
+                    @"D:\Videos\tnt-te.mp4",
+                    @"D:\Videos\tnt-te.mp4"
+                })
+                .SetOutput(@"D:\Videos\tnt-concat.mp4");
 
             string commandString = superImposeFFMPEGCommand.WritePart();
             Console.Write(commandString);
