@@ -8,5 +8,10 @@
         {
             FFMPEGCommand = new FFMPEGCommand(executePath);
         }
+
+        internal FFMPEGCommand GetFFMPEGCommand()
+        {
+            return FFMPEGCommand;
+        }
     }
 }

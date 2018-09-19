@@ -41,9 +41,20 @@ namespace FlixpressFFMPEG.Commands
         public string WritePart()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(ExecutePath + " ");
+            sb.Append($"{WriteExecutePath()} {WriteArguments()}");
+            return sb.ToString();
+        }
 
-            foreach(string input in Inputs)
+        public string WriteExecutePath()
+        {
+            return ExecutePath;
+        }
+
+        public string WriteArguments()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (string input in Inputs)
             {
                 sb.Append($"-i {input} ");
             }
