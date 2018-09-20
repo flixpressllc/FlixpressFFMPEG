@@ -1,6 +1,6 @@
 ﻿namespace FlixpressFFMPEG.Commands
 {
-    public interface ICommandPart
+    public interface ISelfWriter
     {
         string WritePart();
     }

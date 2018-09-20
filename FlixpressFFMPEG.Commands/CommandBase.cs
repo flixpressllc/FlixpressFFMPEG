@@ -1,10 +1,10 @@
 ﻿namespace FlixpressFFMPEG.Commands
 {
-    public abstract class FilterComplexCommandBase
+    public abstract class CommandBase
     {
         protected FFMPEGCommand FFMPEGCommand { get; set; }
 
-        public FilterComplexCommandBase(string executePath)
+        public CommandBase(string executePath)
         {
             FFMPEGCommand = new FFMPEGCommand(executePath);
         }

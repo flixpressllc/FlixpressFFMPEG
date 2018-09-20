@@ -3,7 +3,7 @@ using System.Text;
 
 namespace FlixpressFFMPEG.Commands
 {
-    public class Filter : ICommandPart
+    public class Filter : ISelfWriter
     {
         public string Name { get; set; }
         public string Value { get; set; }
