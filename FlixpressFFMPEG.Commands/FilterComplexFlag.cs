@@ -3,7 +3,7 @@ using System.Text;
 
 namespace FlixpressFFMPEG.Commands
 {
-    public class FilterComplexFlag : ICommandPart
+    public class FilterComplexFlag : IFlag
     {
         public List<FilterComplexExpression> FilterComplexExpressions { get; set; }
 

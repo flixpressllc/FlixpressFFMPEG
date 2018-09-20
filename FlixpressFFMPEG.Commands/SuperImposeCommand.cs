@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FlixpressFFMPEG.Commands
 {
-    public class SuperImposeCommand : FilterComplexCommandBase, ICommandPart
+    public class SuperImposeCommand : CommandBase, ISelfWriter
     {
         private string BaseVideoPath { get; set; }
         private List<OverlayVideo> OverlayVideos { get; set; }
@@ -73,7 +73,7 @@ namespace FlixpressFFMPEG.Commands
                     .SetOutputIdentifier((n < OverlayVideos.Count - 1) ? $"res{n + 1}" : "")
                 );
 
-                FFMPEGCommand.SetFilterComplexFlag(filterComplexFlag);
+                FFMPEGCommand.AddFlag(filterComplexFlag);
             }
 
             return FFMPEGCommand.WritePart();

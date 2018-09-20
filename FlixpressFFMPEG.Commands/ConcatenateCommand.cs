@@ -2,7 +2,7 @@
 
 namespace FlixpressFFMPEG.Commands
 {
-    public class ConcatenateCommand : FilterComplexCommandBase, ICommandPart
+    public class ConcatenateCommand : CommandBase, ISelfWriter
     {
         public List<string> Files { get; set; }
 
@@ -52,7 +52,7 @@ namespace FlixpressFFMPEG.Commands
                 );
             }
 
-            FFMPEGCommand.SetFilterComplexFlag(filterComplexFlag);
+            FFMPEGCommand.AddFlag(filterComplexFlag);
 
             return FFMPEGCommand.WritePart();
         }

@@ -56,8 +56,14 @@ namespace FlixpressFFMPEG.Tests
                 })
                 .SetOutput(@"D:\Videos\tnt-concat.mp4");
 
-            string commandString = superImposeFFMPEGCommand.WritePart();
-            Console.Write(commandString);
+            VideoAudioSyncCommand videoAudioSyncCommand = new VideoAudioSyncCommand(@"C:\tools\ffmpegnew.exe")
+                .SetVideoPath(@"D:\Videos\offsync.mp4")
+                .SetOffsetAdjustment(-0.4)
+                .SetOutput(@"D:\Videos\synched.mp4");
+
+            string commandString = videoAudioSyncCommand.WritePart();
+            //Console.Write(commandString);
+            Executor.Execute(videoAudioSyncCommand);
             Console.ReadLine();
         }
     }

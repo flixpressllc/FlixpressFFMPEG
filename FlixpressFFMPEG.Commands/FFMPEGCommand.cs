@@ -3,16 +3,18 @@ using System.Text;
 
 namespace FlixpressFFMPEG.Commands
 {
-    public class FFMPEGCommand : ICommandPart
+    public class FFMPEGCommand : ISelfWriter
     {
         public string ExecutePath { get; set; }
         public List<string> Inputs { get; set; }
-        public FilterComplexFlag FilterComplexFlag { get; set; }
+        //public FilterComplexFlag FilterComplexFlag { get; set; }
+        public List<IFlag> Flags { get; set; }
         public string Output { get; set; }
 
         public FFMPEGCommand()
         {
             Inputs = new List<string>();
+            Flags = new List<IFlag>();
         }
 
         public FFMPEGCommand(string executePath) : this()
@@ -26,11 +28,19 @@ namespace FlixpressFFMPEG.Commands
             return this;
         }
 
+        public FFMPEGCommand AddFlag(IFlag flag)
+        {
+            Flags.Add(flag);
+            return this;
+        }
+
+        /*
         public FFMPEGCommand SetFilterComplexFlag(FilterComplexFlag filterComplexFlag)
         {
             FilterComplexFlag = filterComplexFlag;
             return this;
         }
+        */
 
         public FFMPEGCommand SetOutput(string output)
         {
@@ -59,8 +69,15 @@ namespace FlixpressFFMPEG.Commands
                 sb.Append($"-i {input} ");
             }
 
+            /*
             if (FilterComplexFlag != null)
                 sb.Append(FilterComplexFlag.WritePart());
+            */
+
+            foreach(var flag in Flags)
+            {
+                sb.Append(flag.WritePart());
+            }
 
             sb.Append($" {Output}");
 

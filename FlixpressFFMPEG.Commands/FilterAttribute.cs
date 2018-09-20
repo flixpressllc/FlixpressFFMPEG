@@ -1,6 +1,6 @@
 ﻿namespace FlixpressFFMPEG.Commands
 {
-    public class FilterAttribute : ICommandPart
+    public class FilterAttribute : ISelfWriter
     {
         public string Name { get; set; }
 

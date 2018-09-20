@@ -15,8 +15,8 @@ namespace FlixpressFFMPEG.Commands
             ffmpeg.WaitForExit();
         }
 
-        public static void Execute<TFilterComplexCommand>(TFilterComplexCommand filterComplexCommand)
-            where TFilterComplexCommand : FilterComplexCommandBase
+        public static void Execute<TCommand>(TCommand filterComplexCommand)
+            where TCommand : CommandBase
         {
             Execute(filterComplexCommand.GetFFMPEGCommand());
         }
