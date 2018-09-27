@@ -1,4 +1,5 @@
 ﻿using FlixpressFFMPEG.Commands;
+using FlixpressFFMPEG.Probe;
 using System;
 using System.Collections.Generic;
 
@@ -39,7 +40,7 @@ namespace FlixpressFFMPEG.Tests
                 .SetFilterComplexFlag(filterComplexFlag)
                 .SetOutput(@"D:\Videos\subg-imposed.mpr");
                 */
-
+            /*
             SuperImposeCommand superImposeFFMPEGCommand = new SuperImposeCommand("ffmpegnew")
                 .SetBaseVideoPath(@"D:\Videos\subg.mp4")
                 .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 5, 5)
@@ -55,15 +56,20 @@ namespace FlixpressFFMPEG.Tests
                     @"D:\Videos\tnt-te.mp4"
                 })
                 .SetOutput(@"D:\Videos\tnt-concat.mp4");
-
+            */
+            /*
             VideoAudioSyncCommand videoAudioSyncCommand = new VideoAudioSyncCommand(@"C:\tools\ffmpegnew.exe")
                 .SetVideoPath(@"D:\Videos\offsync.mp4")
                 .SetOffsetAdjustment(-0.4)
                 .SetOutput(@"D:\Videos\synched.mp4");
+            
+            FFMPEGExecutor.Execute(videoAudioSyncCommand);            
 
             string commandString = videoAudioSyncCommand.WritePart();
-            //Console.Write(commandString);
-            Executor.Execute(videoAudioSyncCommand);
+            */
+
+            Dimension dimension = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"C:\Users\Iz\Pictures\Downloads\celtics.jpg");
+            Dimension thirded = Dimension.ScaleToWidth(dimension, 1080);
             Console.ReadLine();
         }
     }

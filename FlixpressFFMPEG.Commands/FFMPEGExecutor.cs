@@ -2,7 +2,7 @@
 
 namespace FlixpressFFMPEG.Commands
 {
-    public static class Executor
+    public static class FFMPEGExecutor
     {
         public static void Execute(FFMPEGCommand fFMPEGCommand)
         {

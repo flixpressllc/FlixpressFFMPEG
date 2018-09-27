@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlixpressFFMPEG.Commands\FlixpressFFMPEG.Commands.csproj" />
+    <ProjectReference Include="..\FlixpressFFMPEG.Probe\FlixpressFFMPEG.Probe.csproj" />
   </ItemGroup>
 
 </Project>

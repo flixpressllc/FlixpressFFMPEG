@@ -3,6 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>FlixpressFFMPEG.Commands</RootNamespace>
+    <Version>0.1.0</Version>
+    <Description>FFMPEG Wrapper</Description>
+    <Copyright>2018</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
