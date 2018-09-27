@@ -50,16 +50,26 @@ namespace FlixpressFFMPEG.Commands
             // Add the first expression, and that is to merge the first video and the base
             for(int n = 0; n < OverlayVideos.Count; n++)
             {
+                OverlayVideo overlayVideo = OverlayVideos[n];
+
+
                 string resultingBaseFromPrevious = (n == 0) ? "0:v" : "res" + n;
-                filterComplexFlag.AddFilterComplexExpression(new FilterComplexExpression()
+
+                FilterComplexExpression timingExpression = new FilterComplexExpression()
                     .AddInputIdentifier($"{n + 1}")
                     .AddFilter(new Filter()
                         .SetName("setpts")
                         .SetValue($"PTS+{OverlayVideos[n].StartOffsetInSeconds}/TB")
-
                     )
-                    .SetOutputIdentifier($"top{n + 1}")
-                );
+                    .SetOutputIdentifier($"top{n + 1}");
+
+                if (overlayVideo.Dimension.Width > 0 || overlayVideo.Dimension.Height > 0)
+                    timingExpression.AddFilter(new Filter()
+                        .SetName("scale")
+                        .SetValue($"{overlayVideo.Dimension.Width.ToString()}:{overlayVideo.Dimension.Height.ToString()}")
+                    );
+
+                filterComplexFlag.AddFilterComplexExpression(timingExpression);
 
                 int startOffset = OverlayVideos[n].StartOffsetInSeconds;
                 int until = startOffset + OverlayVideos[n].DurationInSeconds;
@@ -68,9 +78,7 @@ namespace FlixpressFFMPEG.Commands
                         .SetName("overlay")
                         .AddAttribute("enable", $"'between(t, {startOffset}, {until})'");
 
-                OverlayVideo overlayVideo = OverlayVideos[n];
-
-                if (overlayVideo.Coordinate.X > 0 && overlayVideo.Coordinate.Y > 0)
+                if (overlayVideo.Coordinate.X > 0 || overlayVideo.Coordinate.Y > 0)
                 {
                     overlayFilter.AddAttribute("x", overlayVideo.Coordinate.X.ToString())
                         .AddAttribute("y", overlayVideo.Coordinate.X.ToString());

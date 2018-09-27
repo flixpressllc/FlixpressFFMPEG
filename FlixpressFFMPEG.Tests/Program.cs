@@ -28,10 +28,10 @@ namespace FlixpressFFMPEG.Tests
                 .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 20, 5)
                 .SetOutput(@"D:\Videos\subg-imposed-coords-1.mp4");
             */
-            /*
+            
             SuperImposeCommand superImposeFFMPEGCommand = new SuperImposeCommand(@"C:\tools\ffmpegnew.exe")
                .SetBaseVideoPath(@"D:\Videos\subg-short.mp4")
-               .AddOverlayVideo(@"D:\Videos\banner_4.jpg", 0, 5)
+               .AddOverlayVideo(@"D:\Videos\banner_4.jpg", 0, 5, null, new Dimension(300,10))
                .AddOverlayVideo(@"D:\Videos\banner_2.jpg", 5, 5)
                .AddOverlayVideo(@"D:\Videos\banner_3.jpg", 10, 5)
                .AddOverlayVideo(@"D:\Videos\banner_1.jpg", 15, 5)
@@ -40,7 +40,7 @@ namespace FlixpressFFMPEG.Tests
             //string command = superImposeFFMPEGCommand.WritePart();
 
             FFMPEGExecutor.Execute(superImposeFFMPEGCommand);
-            */
+            
             var dummy = 9;
             
             /*
@@ -53,14 +53,14 @@ namespace FlixpressFFMPEG.Tests
                 })
                 .SetOutput(@"D:\Videos\tnt-concat.mp4");
             */
-            
+            /*
             VideoAudioSyncCommand videoAudioSyncCommand = new VideoAudioSyncCommand(@"C:\tools\ffmpegnew.exe")
                 .SetVideoPath(@"D:\Videos\offsync.mp4")
                 .SetOffsetAdjustment(-0.4)
                 .SetOutput(@"D:\Videos\synched.mp4");
             
             FFMPEGExecutor.Execute(videoAudioSyncCommand);            
-            
+            */
             //string commandString = videoAudioSyncCommand.WritePart();            
             
             //Dimension dimension = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"C:\Users\Iz\Pictures\Downloads\celtics.jpg");
