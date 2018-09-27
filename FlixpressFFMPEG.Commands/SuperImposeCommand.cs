@@ -81,7 +81,7 @@ namespace FlixpressFFMPEG.Commands
                 if (overlayVideo.Coordinate.X > 0 || overlayVideo.Coordinate.Y > 0)
                 {
                     overlayFilter.AddAttribute("x", overlayVideo.Coordinate.X.ToString())
-                        .AddAttribute("y", overlayVideo.Coordinate.X.ToString());
+                        .AddAttribute("y", overlayVideo.Coordinate.Y.ToString());
                 }  
 
                 filterComplexFlag.AddFilterComplexExpression(new FilterComplexExpression()

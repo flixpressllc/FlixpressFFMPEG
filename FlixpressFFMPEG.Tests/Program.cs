@@ -28,14 +28,23 @@ namespace FlixpressFFMPEG.Tests
                 .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 20, 5)
                 .SetOutput(@"D:\Videos\subg-imposed-coords-1.mp4");
             */
-            
+
+            Dimension dimensionOfMainVideo = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"D:\Videos\subg-short.mp4");
+            Dimension fixedMainVideoDimension = Dimension.ScaleToWidth(dimensionOfMainVideo, 1920);
+
+            Dimension dimensionOfBanner = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"D:\Videos\banner_1.jpg");
+            Dimension fixedBannerDimension = Dimension.ScaleToWidth(dimensionOfBanner, 1920);
+
+            double videoDuration = FFProbeTools.GetVideoDuration(@"c:\tools\ffprobe.exe", @"D:\Videos\subg-short.mp4");
+
             SuperImposeCommand superImposeFFMPEGCommand = new SuperImposeCommand(@"C:\tools\ffmpegnew.exe")
-               .SetBaseVideoPath(@"D:\Videos\subg-short.mp4")
-               .AddOverlayVideo(@"D:\Videos\banner_4.jpg", 0, 5, null, new Dimension(300,10))
-               .AddOverlayVideo(@"D:\Videos\banner_2.jpg", 5, 5)
-               .AddOverlayVideo(@"D:\Videos\banner_3.jpg", 10, 5)
-               .AddOverlayVideo(@"D:\Videos\banner_1.jpg", 15, 5)
-               .SetOutput(@"D:\Videos\subg-imposed-banners1.mp4");
+               .SetBaseVideoPath(@"D:\Videos\blue-bkg.jpg")
+               .AddOverlayVideo(@"D:\Videos\subg-short.mp4", 0, (int)videoDuration, new Coordinate(0, fixedBannerDimension.Height), fixedMainVideoDimension)
+               .AddOverlayVideo(@"D:\Videos\banner_1.jpg", 0, 5, null, fixedBannerDimension)
+               .AddOverlayVideo(@"D:\Videos\banner_2.jpg", 5, 5, null, fixedBannerDimension)
+               .AddOverlayVideo(@"D:\Videos\banner_3.jpg", 10, 5, null, fixedBannerDimension)
+               .AddOverlayVideo(@"D:\Videos\banner_4.jpg", 15, (int)videoDuration-15, null, fixedBannerDimension)
+               .SetOutput(@"D:\Videos\subg-square.mp4");
 
             //string command = superImposeFFMPEGCommand.WritePart();
 
