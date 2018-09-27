@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlixpressFFMPEG.Commands", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlixpressFFMPEG.Tests", "FlixpressFFMPEG.Tests\FlixpressFFMPEG.Tests.csproj", "{98971D61-42C2-4F7B-ADE7-28D932030D98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlixpressFFMPEG.Probe", "FlixpressFFMPEG.Probe\FlixpressFFMPEG.Probe.csproj", "{98394864-B3F2-4977-BB12-0A4E8F097633}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlixpressFFMPEG.Probe", "FlixpressFFMPEG.Probe\FlixpressFFMPEG.Probe.csproj", "{98394864-B3F2-4977-BB12-0A4E8F097633}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlixpressFFMPEG.Common", "FlixpressFFMPEG.Common\FlixpressFFMPEG.Common.csproj", "{DD984879-AAF1-4FED-A734-E904242E798E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{98394864-B3F2-4977-BB12-0A4E8F097633}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98394864-B3F2-4977-BB12-0A4E8F097633}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98394864-B3F2-4977-BB12-0A4E8F097633}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD984879-AAF1-4FED-A734-E904242E798E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD984879-AAF1-4FED-A734-E904242E798E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD984879-AAF1-4FED-A734-E904242E798E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD984879-AAF1-4FED-A734-E904242E798E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
