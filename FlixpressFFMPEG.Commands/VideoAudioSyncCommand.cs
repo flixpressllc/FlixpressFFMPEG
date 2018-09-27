@@ -14,20 +14,13 @@ namespace FlixpressFFMPEG.Commands
         public VideoAudioSyncCommand SetVideoPath(string videoPath)
         {
             VideoPath = videoPath;
-            FFMPEGCommand.AddFlag(new SimpleFlag("i", VideoPath));
             return this;
         }
 
         public VideoAudioSyncCommand SetOffsetAdjustment(double offsetAdjustment)
         {
             OffsetAdjustment = offsetAdjustment;
-            FFMPEGCommand.AddFlag(new SimpleFlag("itsoffset", OffsetAdjustment.ToString()));
-            FFMPEGCommand.AddFlag(new SimpleFlag("i", VideoPath));
-            FFMPEGCommand.AddFlag(new SimpleFlag("vcodec", "copy"));
-            FFMPEGCommand.AddFlag(new SimpleFlag("acodec", "copy"));
-            FFMPEGCommand.AddFlag(new SimpleFlag("map", "0:0"));
-            FFMPEGCommand.AddFlag(new SimpleFlag("map", "1:1"));
-            FFMPEGCommand.AddFlag(new SimpleFlag("y", null));
+            
             return this;
         }
 
@@ -41,6 +34,15 @@ namespace FlixpressFFMPEG.Commands
         public string WritePart()
         {
             //StringBuilder sb = new StringBuilder();
+
+            FFMPEGCommand.AddFlag(new SimpleFlag("i", VideoPath));
+            FFMPEGCommand.AddFlag(new SimpleFlag("itsoffset", OffsetAdjustment.ToString()));
+            FFMPEGCommand.AddFlag(new SimpleFlag("i", VideoPath));
+            FFMPEGCommand.AddFlag(new SimpleFlag("vcodec", "copy"));
+            FFMPEGCommand.AddFlag(new SimpleFlag("acodec", "copy"));
+            FFMPEGCommand.AddFlag(new SimpleFlag("map", "0:0"));
+            FFMPEGCommand.AddFlag(new SimpleFlag("map", "1:1"));
+            FFMPEGCommand.AddFlag(new SimpleFlag("y", null));
 
 
             return FFMPEGCommand.WritePart();

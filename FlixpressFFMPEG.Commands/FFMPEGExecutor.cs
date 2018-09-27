@@ -21,8 +21,9 @@ namespace FlixpressFFMPEG.Commands
         }
 
         public static void Execute<TCommand>(TCommand filterComplexCommand)
-            where TCommand : CommandBase
+            where TCommand : CommandBase, ISelfWriter
         {
+            filterComplexCommand.WritePart();
             Execute(filterComplexCommand.GetFFMPEGCommand());
         }
     }

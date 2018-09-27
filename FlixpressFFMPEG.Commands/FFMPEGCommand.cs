@@ -69,11 +69,6 @@ namespace FlixpressFFMPEG.Commands
                 sb.Append($"-i {input} ");
             }
 
-            /*
-            if (FilterComplexFlag != null)
-                sb.Append(FilterComplexFlag.WritePart());
-            */
-
             foreach(var flag in Flags)
             {
                 sb.Append(flag.WritePart());
