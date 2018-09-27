@@ -87,6 +87,7 @@ namespace FlixpressFFMPEG.Commands
             }
 
             FFMPEGCommand.AddFlag(filterComplexFlag);
+            FFMPEGCommand.AddFlag(new SimpleFlag("y", null));
 
             return FFMPEGCommand.WritePart();
         }

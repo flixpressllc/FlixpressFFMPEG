@@ -19,7 +19,7 @@ namespace FlixpressFFMPEG.Tests
                 .SetFilterComplexFlag(filterComplexFlag)
                 .SetOutput(@"D:\Videos\subg-imposed.mpr");
                 */
-            
+
             /*
             SuperImposeCommand superImposeFFMPEGCommand = new SuperImposeCommand(@"C:\tools\ffmpegnew.exe")
                 .SetBaseVideoPath(@"D:\Videos\subg-short.mp4")
@@ -27,6 +27,17 @@ namespace FlixpressFFMPEG.Tests
                 .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 15, 5, new Coordinate(200,200))
                 .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 20, 5)
                 .SetOutput(@"D:\Videos\subg-imposed-coords-1.mp4");
+            */
+            /*
+            SuperImposeCommand superImposeFFMPEGCommand = new SuperImposeCommand(@"C:\tools\ffmpegnew.exe")
+               .SetBaseVideoPath(@"D:\Videos\subg-short.mp4")
+               .AddOverlayVideo(@"D:\Videos\banner_4.jpg", 0, 5)
+               .AddOverlayVideo(@"D:\Videos\banner_2.jpg", 5, 5)
+               .AddOverlayVideo(@"D:\Videos\banner_3.jpg", 10, 5)
+               .AddOverlayVideo(@"D:\Videos\banner_1.jpg", 15, 5)
+               .SetOutput(@"D:\Videos\subg-imposed-banners1.mp4");
+
+            //string command = superImposeFFMPEGCommand.WritePart();
 
             FFMPEGExecutor.Execute(superImposeFFMPEGCommand);
             */

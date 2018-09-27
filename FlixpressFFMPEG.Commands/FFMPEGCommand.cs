@@ -71,10 +71,10 @@ namespace FlixpressFFMPEG.Commands
 
             foreach(var flag in Flags)
             {
-                sb.Append(flag.WritePart());
+                sb.Append(flag.WritePart() + " ");
             }
 
-            sb.Append($" {Output}");
+            sb.Append($"{Output}");
 
             return sb.ToString();
         }
