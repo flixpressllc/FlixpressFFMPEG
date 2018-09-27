@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FlixpressFFMPEG.Common" Version="1.0.0" />
+    <ProjectReference Include="..\FlixpressFFMPEG.Common\FlixpressFFMPEG.Common.csproj" />
   </ItemGroup>
 
 </Project>

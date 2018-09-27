@@ -9,4 +9,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FlixpressFFMPEG.Probe\FlixpressFFMPEG.Probe.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 
 namespace FlixpressFFMPEG.Commands
 {
@@ -6,13 +7,17 @@ namespace FlixpressFFMPEG.Commands
     {
         public static void Execute(FFMPEGCommand fFMPEGCommand)
         {
-            Process ffmpeg = new Process();
-            ffmpeg.StartInfo.FileName = fFMPEGCommand.WriteExecutePath();
-            ffmpeg.StartInfo.Arguments = fFMPEGCommand.WriteArguments();
-            ffmpeg.StartInfo.UseShellExecute = false;
-            ffmpeg.StartInfo.RedirectStandardError = true;
-            ffmpeg.Start();
-            ffmpeg.WaitForExit();
+            using (Process ffmpeg = new Process())
+            {
+                ffmpeg.StartInfo.FileName = fFMPEGCommand.WriteExecutePath();
+                ffmpeg.StartInfo.WorkingDirectory = Path.GetDirectoryName(ffmpeg.StartInfo.FileName);
+                ffmpeg.StartInfo.UseShellExecute = false;
+
+                ffmpeg.StartInfo.Arguments = fFMPEGCommand.WriteArguments();                
+                //ffmpeg.StartInfo.RedirectStandardError = true;
+                ffmpeg.Start();
+                ffmpeg.WaitForExit();
+            }
         }
 
         public static void Execute<TCommand>(TCommand filterComplexCommand)

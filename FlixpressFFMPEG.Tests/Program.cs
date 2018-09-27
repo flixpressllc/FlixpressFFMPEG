@@ -1,4 +1,5 @@
 ﻿using FlixpressFFMPEG.Commands;
+using FlixpressFFMPEG.Common;
 using FlixpressFFMPEG.Probe;
 using System;
 using System.Collections.Generic;
@@ -40,14 +41,21 @@ namespace FlixpressFFMPEG.Tests
                 .SetFilterComplexFlag(filterComplexFlag)
                 .SetOutput(@"D:\Videos\subg-imposed.mpr");
                 */
-            /*
-            SuperImposeCommand superImposeFFMPEGCommand = new SuperImposeCommand("ffmpegnew")
-                .SetBaseVideoPath(@"D:\Videos\subg.mp4")
-                .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 5, 5)
-                .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 15, 5)
+            
+            SuperImposeCommand superImposeFFMPEGCommand = new SuperImposeCommand(@"C:\tools\ffmpegnew.exe")
+                .SetBaseVideoPath(@"D:\Videos\subg-short.mp4")
+                .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 5, 5, new Coordinate(100,100))
+                .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 15, 5, new Coordinate(200,200))
                 .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 20, 5)
-                .SetOutput(@"D:\Videos\subg-imposed-3.mp4");
+                .SetOutput(@"D:\Videos\subg-imposed-coords-1.mp4");
 
+            string superImposeCommandString = superImposeFFMPEGCommand.WritePart();
+
+            FFMPEGExecutor.Execute(superImposeFFMPEGCommand);
+            
+            var dummy = 9;
+            
+            /*
             ConcatenateCommand concatenateCommand = new ConcatenateCommand("ffmpegnew")
                 .AddFiles(new List<string>
                 {
@@ -64,12 +72,11 @@ namespace FlixpressFFMPEG.Tests
                 .SetOutput(@"D:\Videos\synched.mp4");
             
             FFMPEGExecutor.Execute(videoAudioSyncCommand);            
-
-            string commandString = videoAudioSyncCommand.WritePart();
+            
+            string commandString = videoAudioSyncCommand.WritePart();            
             */
-
-            Dimension dimension = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"C:\Users\Iz\Pictures\Downloads\celtics.jpg");
-            Dimension thirded = Dimension.ScaleToWidth(dimension, 1080);
+            //Dimension dimension = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"C:\Users\Iz\Pictures\Downloads\celtics.jpg");
+            //Dimension thirded = Dimension.ScaleToWidth(dimension, 1080);
             Console.ReadLine();
         }
     }

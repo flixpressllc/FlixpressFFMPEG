@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlixpressFFMPEG.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -26,9 +27,9 @@ namespace FlixpressFFMPEG.Commands
             return this;
         }
 
-        public SuperImposeCommand AddOverlayVideo(string path, int startOffsetInSeconds, int durationInSeconds)
+        public SuperImposeCommand AddOverlayVideo(string path, int startOffsetInSeconds, int durationInSeconds, Coordinate coordinate = null, Dimension dimension = null)
         {
-            return AddOverlayVideo(new OverlayVideo(path, startOffsetInSeconds, durationInSeconds));
+            return AddOverlayVideo(new OverlayVideo(path, startOffsetInSeconds, durationInSeconds, coordinate, dimension));
         }
 
         public SuperImposeCommand SetOutput(string output)
@@ -63,18 +64,29 @@ namespace FlixpressFFMPEG.Commands
                 int startOffset = OverlayVideos[n].StartOffsetInSeconds;
                 int until = startOffset + OverlayVideos[n].DurationInSeconds;
 
+                Filter overlayFilter = new Filter()
+                        .SetName("overlay")
+                        .AddAttribute("enable", $"'between(t, {startOffset}, {until})'");
+
+                OverlayVideo overlayVideo = OverlayVideos[n];
+
+                if (overlayVideo.Coordinate.X > 0 && overlayVideo.Coordinate.Y > 0)
+                {
+                    overlayFilter.AddAttribute("x", overlayVideo.Coordinate.X.ToString())
+                        .AddAttribute("y", overlayVideo.Coordinate.X.ToString());
+                }  
+
                 filterComplexFlag.AddFilterComplexExpression(new FilterComplexExpression()
                     .AddInputIdentifier(resultingBaseFromPrevious)
                     .AddInputIdentifier($"top{n + 1}")
-                    .AddFilter(new Filter()
-                        .SetName("overlay")
-                        .AddAttribute("enable", $"'between(t, {startOffset}, {until})'")
-                    )
+                    .AddFilter(overlayFilter)
                     .SetOutputIdentifier((n < OverlayVideos.Count - 1) ? $"res{n + 1}" : "")
                 );
 
-                FFMPEGCommand.AddFlag(filterComplexFlag);
+                
             }
+
+            FFMPEGCommand.AddFlag(filterComplexFlag);
 
             return FFMPEGCommand.WritePart();
         }
