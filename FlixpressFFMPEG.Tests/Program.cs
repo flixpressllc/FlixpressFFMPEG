@@ -1,4 +1,5 @@
 ﻿using FlixpressFFMPEG.Commands;
+using FlixpressFFMPEG.Common;
 using FlixpressFFMPEG.Probe;
 using System;
 using System.Collections.Generic;
@@ -11,28 +12,6 @@ namespace FlixpressFFMPEG.Tests
         {
             Console.WriteLine("Hello World!");
 
-            FilterComplexFlag filterComplexFlag = new FilterComplexFlag()
-                .AddFilterComplexExpression(
-                    new FilterComplexExpression()
-                        .AddInputIdentifier("1")
-                        .AddFilter(
-                            new Filter()
-                                .SetName("setpts")
-                                .SetValue("PTS+5/TB")
-                        )
-                        .SetOutputIdentifier("top")
-                )
-                .AddFilterComplexExpression(
-                    new FilterComplexExpression()
-                        .AddInputIdentifier("0:v")
-                        .AddInputIdentifier("top")
-                        .AddFilter(
-                            new Filter()
-                                .SetName("overlay")
-                                .AddAttribute("enable","'between(t,5,10)'")
-                        )
-                );
-
             /*
             FFMPEGCommand fFMPEGCommand = new FFMPEGCommand("ffmpegnew")
                 .AddInput(@"D:\Videos\subg.mp4")
@@ -40,14 +19,40 @@ namespace FlixpressFFMPEG.Tests
                 .SetFilterComplexFlag(filterComplexFlag)
                 .SetOutput(@"D:\Videos\subg-imposed.mpr");
                 */
-            /*
-            SuperImposeCommand superImposeFFMPEGCommand = new SuperImposeCommand("ffmpegnew")
-                .SetBaseVideoPath(@"D:\Videos\subg.mp4")
-                .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 5, 5)
-                .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 15, 5)
-                .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 20, 5)
-                .SetOutput(@"D:\Videos\subg-imposed-3.mp4");
 
+            /*
+            SuperImposeCommand superImposeFFMPEGCommand = new SuperImposeCommand(@"C:\tools\ffmpegnew.exe")
+                .SetBaseVideoPath(@"D:\Videos\subg-short.mp4")
+                .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 5, 5, new Coordinate(100,100))
+                .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 15, 5, new Coordinate(200,200))
+                .AddOverlayVideo(@"D:\Videos\tnt-te.mp4", 20, 5)
+                .SetOutput(@"D:\Videos\subg-imposed-coords-1.mp4");
+            */
+
+            Dimension dimensionOfMainVideo = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"D:\Videos\subg-short.mp4");
+            Dimension fixedMainVideoDimension = Dimension.ScaleToWidth(dimensionOfMainVideo, 1920);
+
+            Dimension dimensionOfBanner = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"D:\Videos\banner_1.jpg");
+            Dimension fixedBannerDimension = Dimension.ScaleToWidth(dimensionOfBanner, 1920);
+
+            double videoDuration = FFProbeTools.GetVideoDuration(@"c:\tools\ffprobe.exe", @"D:\Videos\subg-short.mp4");
+
+            SuperImposeCommand superImposeFFMPEGCommand = new SuperImposeCommand(@"C:\tools\ffmpegnew.exe")
+               .SetBaseVideoPath(@"D:\Videos\blue-bkg.jpg")
+               .AddOverlayVideo(@"D:\Videos\subg-short.mp4", 0, (int)videoDuration, new Coordinate(0, fixedBannerDimension.Height), fixedMainVideoDimension)
+               .AddOverlayVideo(@"D:\Videos\banner_1.jpg", 0, 5, null, fixedBannerDimension)
+               .AddOverlayVideo(@"D:\Videos\banner_2.jpg", 5, 5, null, fixedBannerDimension)
+               .AddOverlayVideo(@"D:\Videos\banner_3.jpg", 10, 5, null, fixedBannerDimension)
+               .AddOverlayVideo(@"D:\Videos\banner_4.jpg", 15, (int)videoDuration-15, null, fixedBannerDimension)
+               .SetOutput(@"D:\Videos\subg-square.mp4");
+
+            //string command = superImposeFFMPEGCommand.WritePart();
+
+            FFMPEGExecutor.Execute(superImposeFFMPEGCommand);
+            
+            var dummy = 9;
+            
+            /*
             ConcatenateCommand concatenateCommand = new ConcatenateCommand("ffmpegnew")
                 .AddFiles(new List<string>
                 {
@@ -64,12 +69,11 @@ namespace FlixpressFFMPEG.Tests
                 .SetOutput(@"D:\Videos\synched.mp4");
             
             FFMPEGExecutor.Execute(videoAudioSyncCommand);            
-
-            string commandString = videoAudioSyncCommand.WritePart();
             */
-
-            Dimension dimension = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"C:\Users\Iz\Pictures\Downloads\celtics.jpg");
-            Dimension thirded = Dimension.ScaleToWidth(dimension, 1080);
+            //string commandString = videoAudioSyncCommand.WritePart();            
+            
+            //Dimension dimension = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"C:\Users\Iz\Pictures\Downloads\celtics.jpg");
+            //Dimension thirded = Dimension.ScaleToWidth(dimension, 1080);
             Console.ReadLine();
         }
     }

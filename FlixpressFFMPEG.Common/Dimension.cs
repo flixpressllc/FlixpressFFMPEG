@@ -1,4 +1,4 @@
-﻿namespace FlixpressFFMPEG.Probe
+﻿namespace FlixpressFFMPEG.Common
 {
     public class Dimension
     {

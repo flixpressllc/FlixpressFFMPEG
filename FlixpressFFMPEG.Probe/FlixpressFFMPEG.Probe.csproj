@@ -2,8 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <Description>FFProbe Wrapper. Contains extracting dimensions of a video or image, and duration of audio and videos</Description>
+    <Description>Now depends on FlixpressFFMPEG.Common</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.2</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FlixpressFFMPEG.Common" Version="1.0.0" />
+  </ItemGroup>
 
 </Project>

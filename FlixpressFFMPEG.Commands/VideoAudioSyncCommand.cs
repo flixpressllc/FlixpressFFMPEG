@@ -20,6 +20,7 @@ namespace FlixpressFFMPEG.Commands
         public VideoAudioSyncCommand SetOffsetAdjustment(double offsetAdjustment)
         {
             OffsetAdjustment = offsetAdjustment;
+            
             return this;
         }
 
@@ -42,6 +43,7 @@ namespace FlixpressFFMPEG.Commands
             FFMPEGCommand.AddFlag(new SimpleFlag("map", "0:0"));
             FFMPEGCommand.AddFlag(new SimpleFlag("map", "1:1"));
             FFMPEGCommand.AddFlag(new SimpleFlag("y", null));
+
 
             return FFMPEGCommand.WritePart();
         }
