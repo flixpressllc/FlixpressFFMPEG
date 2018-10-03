@@ -29,6 +29,7 @@ namespace FlixpressFFMPEG.Tests
                 .SetOutput(@"D:\Videos\subg-imposed-coords-1.mp4");
             */
 
+            /*
             Dimension dimensionOfMainVideo = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"D:\Videos\subg-short.mp4");
             Dimension fixedMainVideoDimension = Dimension.ScaleToWidth(dimensionOfMainVideo, 1920 + (int)(0.2 * 1920));
 
@@ -49,7 +50,15 @@ namespace FlixpressFFMPEG.Tests
             //string command = superImposeFFMPEGCommand.WritePart();
 
             FFMPEGExecutor.Execute(superImposeFFMPEGCommand);
-            
+            */
+
+            MixAudioIntoVideoCommand mixAudioIntoVideoCommand = new MixAudioIntoVideoCommand(@"C:\tools\ffmpegnew.exe")
+                .SetVideoPath(@"D:\Videos\subg-short.mp4")
+                .SetAudioPath(@"D:\Videos\Reading_Rainbow.mp3")
+                .SetOutput(@"D:\Videos\subg-audio-mixed.mp4");
+
+            FFMPEGExecutor.Execute(mixAudioIntoVideoCommand);
+            //string command = mixAudioIntoVideoCommand.WritePart();
             var dummy = 9;
             
             /*
