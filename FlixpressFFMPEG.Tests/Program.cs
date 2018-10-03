@@ -30,7 +30,7 @@ namespace FlixpressFFMPEG.Tests
             */
 
             Dimension dimensionOfMainVideo = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"D:\Videos\subg-short.mp4");
-            Dimension fixedMainVideoDimension = Dimension.ScaleToWidth(dimensionOfMainVideo, 1920);
+            Dimension fixedMainVideoDimension = Dimension.ScaleToWidth(dimensionOfMainVideo, 1920 + (int)(0.2 * 1920));
 
             Dimension dimensionOfBanner = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"D:\Videos\banner_1.jpg");
             Dimension fixedBannerDimension = Dimension.ScaleToWidth(dimensionOfBanner, 1920);
@@ -39,7 +39,7 @@ namespace FlixpressFFMPEG.Tests
 
             SuperImposeCommand superImposeFFMPEGCommand = new SuperImposeCommand(@"C:\tools\ffmpegnew.exe")
                .SetBaseVideoPath(@"D:\Videos\blue-bkg.jpg")
-               .AddOverlayVideo(@"D:\Videos\subg-short.mp4", 0, (int)videoDuration, new Coordinate(0, fixedBannerDimension.Height), fixedMainVideoDimension)
+               .AddOverlayVideo(@"D:\Videos\subg-short.mp4", 0, (int)videoDuration, new Coordinate( -1 * (int)(0.1 * 1920) , fixedBannerDimension.Height), fixedMainVideoDimension)
                .AddOverlayVideo(@"D:\Videos\banner_1.jpg", 0, 5, null, fixedBannerDimension)
                .AddOverlayVideo(@"D:\Videos\banner_2.jpg", 5, 5, null, fixedBannerDimension)
                .AddOverlayVideo(@"D:\Videos\banner_3.jpg", 10, 5, null, fixedBannerDimension)
