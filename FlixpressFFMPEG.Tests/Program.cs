@@ -52,10 +52,13 @@ namespace FlixpressFFMPEG.Tests
             FFMPEGExecutor.Execute(superImposeFFMPEGCommand);
             */
 
+            double videoDuration = FFProbeTools.GetVideoDuration(@"c:\tools\ffprobe.exe", @"D:\Videos\vlaw\v1.mp4");
+
             MixAudioIntoVideoCommand mixAudioIntoVideoCommand = new MixAudioIntoVideoCommand(@"C:\tools\ffmpegnew.exe")
-                .SetVideoPath(@"D:\Videos\subg-short.mp4")
-                .SetAudioPath(@"D:\Videos\Reading_Rainbow.mp3")
-                .SetOutput(@"D:\Videos\subg-audio-mixed.mp4");
+                .SetVideoPath(@"D:\Videos\vlaw\v1.mp4", videoDuration)
+                .SetAudioPath(@"D:\Videos\vlaw\VlawAudio1.wav", 0.4)
+                .SetCompressorValues()
+                .SetOutput(@"D:\Videos\vlaw\subg-audio-mixed.mp4");
 
             FFMPEGExecutor.Execute(mixAudioIntoVideoCommand);
             //string command = mixAudioIntoVideoCommand.WritePart();
