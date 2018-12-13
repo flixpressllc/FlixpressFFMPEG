@@ -104,16 +104,16 @@ namespace FlixpressFFMPEG.Tests
 
             FFMPEGExecutor.Execute(extractFrameCommand);
             */
-            Dimension dimension = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"D:\Videos\vlaw\v1.jpg");
+            Dimension dimension = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"D:\Videos\vlaw\v1.mp4");
             Dimension desiredDimension = Dimension.ScaleToWidth(dimension, 200);
 
-            ResizeImageCommand resizeImageCommand = new ResizeImageCommand(@"C:\tools\ffmpegnew.exe")
+            ResizeVideoCommand resizeVideoCommand = new ResizeVideoCommand(@"C:\tools\ffmpegnew.exe")
                 .SetInputValues(
-                    inputImagePath: @"D:\Videos\vlaw\v1.jpg",
+                    inputVideoPath: @"D:\Videos\vlaw\v1.mp4",
                     imageDimensions: desiredDimension)
-                .SetOutput(@"D:\Videos\vlaw\v1_t.jpg");
+                .SetOutput(@"D:\Videos\vlaw\v1_sm.avi");
 
-            FFMPEGExecutor.Execute(resizeImageCommand);
+            FFMPEGExecutor.Execute(resizeVideoCommand);
 
             var dummy = 10;
             Console.ReadLine();
