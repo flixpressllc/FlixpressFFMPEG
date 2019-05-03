@@ -3,13 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>FlixpressFFMPEG.Commands</RootNamespace>
-    <Version>1.0.7</Version>
-    <Description>Adds MixAudioIntoVideoCommand</Description>
-    <Copyright>2018</Copyright>
+    <Version>1.0.8</Version>
+    <Description>Adds ExtractAudioCommand</Description>
+    <Copyright>2019</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.0.7.0</AssemblyVersion>
-    <PackageReleaseNotes>Adds resize image command</PackageReleaseNotes>
-    <FileVersion>1.0.7.0</FileVersion>
+    <AssemblyVersion>1.0.8.0</AssemblyVersion>
+    <PackageReleaseNotes>Adds extract audio command</PackageReleaseNotes>
+    <FileVersion>1.0.8.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
