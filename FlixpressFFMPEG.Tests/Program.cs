@@ -105,7 +105,7 @@ namespace FlixpressFFMPEG.Tests
             FFMPEGExecutor.Execute(extractFrameCommand);
             */
 
-            
+            /*
             Dimension dimension = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"D:\Videos\offsync.mp4");
             Dimension desiredDimension = Dimension.ScaleToWidth(dimension, 400);
 
@@ -116,18 +116,20 @@ namespace FlixpressFFMPEG.Tests
                 .SetOutput(@"D:\Videos\offsync_p.mp4");
 
             FFMPEGExecutor.Execute(resizeVideoCommand);
-            
+            */
 
-            /*
+            
             ExtractAudioCommand extractAudioCommand = new ExtractAudioCommand(@"C:\tools\ffmpegnew.exe")
-                .SetInputValues(@"D:\Videos\vlaw\v1.mp4")
-                .SetOutput(@"D:\Videos\vlaw\v1_audio.wav");
+                .SetInputValues(@"D:\Videos\vlaw\VlawAudio1.wav")
+                .SetBitrate("192k")
+                .SetSamplingFrequency(48000)
+                .SetStereo()
+                .SetOutput(@"D:\Videos\vlaw\VlawAudio1.mp3");
 
             FFMPEGExecutor.Execute(extractAudioCommand);
 
             var dummy = 10;
-            */
-            Console.ReadLine();
+            
         }
     }
 }
