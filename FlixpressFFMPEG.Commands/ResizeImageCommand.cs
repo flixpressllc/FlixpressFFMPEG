@@ -29,7 +29,8 @@ namespace FlixpressFFMPEG.Commands
             FFMPEGCommand.AddInput(InputImagePath);
 
             string dimensionString = $"{ImageDimensions.Width.ToString()}:{ImageDimensions.Height.ToString()}";
-            FFMPEGCommand.AddFlag(new SimpleFlag("vf", $"scale={dimensionString}"));
+            // fix for .png transparency thumbnails
+            FFMPEGCommand.AddFlag(new SimpleFlag("filter_complex", $"\"[0]scale={dimensionString}[scaled];[scaled]split = 2[bg][fg];[bg] drawbox=c=0xCCCCCC:replace=1:t=fill[bg];[bg] [fg] overlay\" -f image2 "));
 
             FFMPEGCommand.AddFlag(new SimpleFlag("y", null));
 

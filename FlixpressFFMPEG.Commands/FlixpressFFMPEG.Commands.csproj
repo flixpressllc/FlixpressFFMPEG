@@ -10,6 +10,7 @@
     <AssemblyVersion>1.0.9.0</AssemblyVersion>
     <PackageReleaseNotes>Extract Audio command</PackageReleaseNotes>
     <FileVersion>1.0.9.0</FileVersion>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>
