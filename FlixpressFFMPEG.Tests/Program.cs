@@ -52,6 +52,7 @@ namespace FlixpressFFMPEG.Tests
             FFMPEGExecutor.Execute(superImposeFFMPEGCommand);
             */
 
+            /*
             double videoDuration = FFProbeTools.GetVideoDuration(@"c:\tools\ffprobe.exe", @"D:\Videos\vlaw\v1.mp4");
 
             MixAudioIntoVideoCommand mixAudioIntoVideoCommand = new MixAudioIntoVideoCommand(@"C:\tools\ffmpegnew.exe")
@@ -63,7 +64,8 @@ namespace FlixpressFFMPEG.Tests
             FFMPEGExecutor.Execute(mixAudioIntoVideoCommand);
             //string command = mixAudioIntoVideoCommand.WritePart();
             var dummy = 9;
-            
+            */
+
             /*
             ConcatenateCommand concatenateCommand = new ConcatenateCommand("ffmpegnew")
                 .AddFiles(new List<string>
@@ -83,10 +85,51 @@ namespace FlixpressFFMPEG.Tests
             FFMPEGExecutor.Execute(videoAudioSyncCommand);            
             */
             //string commandString = videoAudioSyncCommand.WritePart();            
-            
+
             //Dimension dimension = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"C:\Users\Iz\Pictures\Downloads\celtics.jpg");
             //Dimension thirded = Dimension.ScaleToWidth(dimension, 1080);
-            Console.ReadLine();
+
+            /*
+            double videoDuration = FFProbeTools.GetVideoDuration(@"c:\tools\ffprobe.exe", @"D:\Videos\vlaw\v1.mp4");
+
+            Dimension dimension = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"D:\Videos\vlaw\v1.mp4");
+            Dimension desiredDimension = Dimension.ScaleToWidth(dimension, dimension.Width / 2);
+
+            ExtractFrameCommand extractFrameCommand = new ExtractFrameCommand(@"C:\tools\ffmpegnew.exe")
+                .SetInputValues(
+                    inputVideoPath: @"D:\Videos\vlaw\v1.mp4",
+                    extractAtSecondMark: videoDuration * 0.10,
+                    imageDimensions: desiredDimension)
+                .SetOutput(@"D:\Videos\vlaw\v1.jpg");
+
+            FFMPEGExecutor.Execute(extractFrameCommand);
+            */
+
+            /*
+            Dimension dimension = FFProbeTools.GetDimensions(@"c:\tools\ffprobe.exe", @"D:\Videos\offsync.mp4");
+            Dimension desiredDimension = Dimension.ScaleToWidth(dimension, 400);
+
+            ResizeVideoCommand resizeVideoCommand = new ResizeVideoCommand(@"C:\tools\ffmpegnew.exe")
+                .SetInputValues(
+                    inputVideoPath: @"D:\Videos\offsync.mp4",
+                    imageDimensions: desiredDimension)
+                .SetOutput(@"D:\Videos\offsync_p.mp4");
+
+            FFMPEGExecutor.Execute(resizeVideoCommand);
+            */
+
+            
+            ExtractAudioCommand extractAudioCommand = new ExtractAudioCommand(@"C:\tools\ffmpegnew.exe")
+                .SetInputValues(@"D:\Videos\vlaw\VlawAudio1.wav")
+                .SetBitrate("192k")
+                .SetSamplingFrequency(48000)
+                .SetStereo()
+                .SetOutput(@"D:\Videos\vlaw\VlawAudio1.mp3");
+
+            FFMPEGExecutor.Execute(extractAudioCommand);
+
+            var dummy = 10;
+            
         }
     }
 }
